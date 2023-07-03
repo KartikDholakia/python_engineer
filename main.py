@@ -27,4 +27,15 @@ if __name__ == '__main__':
     
     # Step - 4: Convert the XML to CSV
     csv_path = xml_to_csv(xml_downloaded, os.getcwd())
+    if len(csv_path):
+        logging.info("CSV File created: " + str(csv_path))
+    else:
+        logging.error("Coudln't convert XML to CSV!!")
+        exit(-1)
+
     
+    # Step - 5: Upload to AWS S3 Bucket
+    if upload_to_s3(csv_path, constants.AWS_BUCKET, constants.AWS_KEY):
+        logging.info("File Uploaded to S3 successfully!!")
+    else:
+        logging.error("Couldn't upload to S3!!")

@@ -6,3 +6,5 @@ csv_headers = [
 	"FinInstrmGnlAttrbts.NtnlCcy",
 	"Issr",
 ]
+AWS_BUCKET = ''
+AWS_KEY = ''

@@ -7,6 +7,7 @@ import zipfile
 from bs4 import BeautifulSoup
 import constants
 import pandas as pd
+import boto3
 
 
 def download_file(file_url: str, path: str):
@@ -189,3 +190,27 @@ def xml_to_csv(xml_path, csv_path):
     except Exception as error:
         logging.error('An error occurred while converting xml to csv:', error)
         return ""
+    
+
+def upload_to_s3(file_path, bucket_name, aws_key):
+    """
+    Function to upload given file to AWS S3.
+    :param file_path: Path of file to be uploaded
+    :param bucket_name: Name of S3 bucket
+    :param aws_key: AWS Access Keys (csv)
+    :return: (bool) True, if successfully uploaded, else false
+    """
+    try:
+        logging.info("Trying to create S3 bucket")
+        s3 = boto3.client('s3')
+        s3.upload_file(
+            Filename=file_path,
+            Bucket=bucket_name,
+            Key=aws_key,
+        )
+        logging.info('File uploaded to S3 bucket successfully')
+        return True
+
+    except Exception as error:
+        logging.error('An error occurred while uploading file to AWS S3: ' + str(error))
+        return False

@@ -14,4 +14,7 @@ if __name__ == '__main__':
         logging.error("Couldn't download the ZIP file")
         exit(-1)
         
-		
+
+    # Step - 3: Extract XML file from the above ZIP file:
+    xml_downloaded = extract_from_zip(zip_file, '.xml')	
+    logging.info("XML Extracted to location: " + str(xml_downloaded))

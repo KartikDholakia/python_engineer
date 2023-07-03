@@ -1,0 +1,3 @@
+INFO:root:Parsing XML File: select.xml
+INFO:root:Traversing through child elements of XML
+INFO:root:Found the download URL: http://firds.esma.europa.eu/firds/DLTINS_20210117_01of01.zip

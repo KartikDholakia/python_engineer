@@ -4,6 +4,9 @@ import logging
 from urllib import request
 import xml.etree.ElementTree as ET
 import zipfile
+from bs4 import BeautifulSoup
+import constants
+import pandas as pd
 
 
 def download_file(file_url: str, path: str):
@@ -115,3 +118,74 @@ def extract_from_zip(zip_path, file_type):
 
     # If unable to extract file, return empty string:
     return "" 
+
+
+def xml_to_csv(xml_path, csv_path):
+    """
+    Creates a CSV file from given XML file with specified columns.
+    :param xml_path: Path to XML file
+    :param csv_path: Location of CSV to be saved
+    :return:
+        (string) Path of newly created CSV file
+    """
+    try:
+        xml_name = os.path.basename(xml_path)
+        csv_name = os.path.splitext(xml_name)[0] + '.csv'
+
+        # Reading the xml file and storing data in xml_data
+        with open(xml_path, 'r', encoding='utf-8') as file:
+            xml_data = file.read()
+        logging.info('Openend he XML file: ' + str(xml_path))
+
+        soup = BeautifulSoup(xml_data, 'xml')
+
+        FinInstrm = soup.find_all('FinInstrm')
+
+        # List of data which will be storing dictonaries of items need to be inserted in the Dataframe
+        data = list()
+
+        for values in FinInstrm:
+            row_value = dict()
+
+            # Checking if TermntdRcrd exists in FinInstrm
+            if values.TermntdRcrd:
+
+                # Checking if FinInstrmGnlAttrbts exists in TermntdRcrd
+                if values.TermntdRcrd.FinInstrmGnlAttrbts:
+
+                    if values.TermntdRcrd.FinInstrmGnlAttrbts.Id:
+                        row_value[constants.csv_headers[0]] = values.TermntdRcrd.FinInstrmGnlAttrbts.Id.text
+
+                    if values.TermntdRcrd.FinInstrmGnlAttrbts.FullNm:
+                        row_value[constants.csv_headers[1]] = values.TermntdRcrd.FinInstrmGnlAttrbts.FullNm.text
+
+                    if values.TermntdRcrd.FinInstrmGnlAttrbts.ClssfctnTp:
+                        row_value[constants.csv_headers[2]] = values.TermntdRcrd.FinInstrmGnlAttrbts.ClssfctnTp.text
+
+                    if values.TermntdRcrd.FinInstrmGnlAttrbts.CmmdtyDerivInd:
+                        row_value[constants.csv_headers[3]] = values.TermntdRcrd.FinInstrmGnlAttrbts.CmmdtyDerivInd.text
+
+                    if values.TermntdRcrd.FinInstrmGnlAttrbts.NtnlCcy:
+                        row_value[constants.csv_headers[4]] = values.TermntdRcrd.FinInstrmGnlAttrbts.NtnlCcy.text
+
+                if values.TermntdRcrd.Issr:
+                    row_value[constants.csv_headers[5]] = values.TermntdRcrd.Issr.text
+
+                # Inserting all the data into final list
+                data.append(row_value)
+
+        logging.info('Data extracted successfully from the XML file')
+
+        df = pd.DataFrame(data=data, columns=constants.csv_headers)
+
+        csv_path = os.path.join(csv_path, csv_name)
+
+        logging.info('Converting the Pandas Dataframe and saving it...')
+
+        df.to_csv(csv_path, index=False)
+
+        return csv_path
+    
+    except Exception as error:
+        logging.error('An error occurred while converting xml to csv:', error)
+        return ""

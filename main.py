@@ -25,3 +25,6 @@ if __name__ == '__main__':
         exit(-1)
 
     
+    # Step - 4: Convert the XML to CSV
+    csv_path = xml_to_csv(xml_downloaded, os.getcwd())
+    

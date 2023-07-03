@@ -14,25 +14,26 @@ def download_file(file_url: str, path: str):
     :param file_url: Web URL of the file to be downloaded
     :param path: Location where you want to download the file
     :return:
-		(bool): Success. If the function was able to download the
-        file then true otherwise false.
+		(string): Name of the file downloaded
     """
 
 	# Extract filename from the given Web URL: 
-    file_name = os.path.basename(file_url)[:5]
-    logging.info('Filename: ' + file_name)
+    file_name = os.path.basename(file_url)
+    logging.info('Filename extracted from URL: ' + file_name)
     
     # Check if the file is already present in 'path':
     if os.path.exists(os.path.join(path, file_name)):
         logging.debug(file_name + ' is already downloaded!')
-        return True
+        return file_name
     else:
+        # Try downloading the file:
         try:
             response = request.urlretrieve(file_url, os.path.join(path, file_name))
-            # response = wget.download(file_url, path)
             logging.info("File downloaded in path" + path)
+            return file_name
         except Exception as error:
             logging.error("Error in downloading" + str(error))
+            return ""
 
 
 
@@ -54,7 +55,6 @@ def fetch_download_link(xml_file, file_type):
     logging.info("Traversing through child elements of XML")
     for element in myroot[1]:
         for sub_element in element:
-            # print(sub_element.tag, sub_element.attrib, sub_element.text)
             if sub_element.attrib['name'] == 'file_type' and sub_element.text == file_type:
                 found = True
                 break

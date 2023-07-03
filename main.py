@@ -17,4 +17,11 @@ if __name__ == '__main__':
 
     # Step - 3: Extract XML file from the above ZIP file:
     xml_downloaded = extract_from_zip(zip_file, '.xml')	
-    logging.info("XML Extracted to location: " + str(xml_downloaded))
+
+    if len(xml_downloaded):
+        logging.info("XML Extracted to location: " + str(xml_downloaded))
+    else:
+        logging.error("Couldn't extract XML file. Aborting...")
+        exit(-1)
+
+    

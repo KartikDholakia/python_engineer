@@ -62,3 +62,19 @@ DEBUG:root:DLTINS_20210117_01of01.zip is already downloaded!
 INFO:root:DLTINS_20210117_01of01.zip downloaded!
 DEBUG:root:File was already extracted!
 INFO:root:XML Extracted to location: C:\Users\admin\Documents\SDE Intern Assignment\SteelEye\python_engineer\DLTINS_20210117_01of01.xml
+INFO:root:Parsing XML File: select.xml
+INFO:root:Traversing through child elements of XML
+INFO:root:Found the download URL: http://firds.esma.europa.eu/firds/DLTINS_20210117_01of01.zip
+INFO:root:Filename extracted from URL: DLTINS_20210117_01of01.zip
+DEBUG:root:DLTINS_20210117_01of01.zip is already downloaded!
+INFO:root:DLTINS_20210117_01of01.zip downloaded!
+DEBUG:root:File was already extracted!
+INFO:root:XML Extracted to location: C:\Users\admin\Documents\SDE Intern Assignment\SteelEye\python_engineer\DLTINS_20210117_01of01.xml
+INFO:root:Parsing XML File: select.xml
+INFO:root:Traversing through child elements of XML
+INFO:root:Found the download URL: http://firds.esma.europa.eu/firds/DLTINS_20210117_01of01.zip
+INFO:root:Filename extracted from URL: DLTINS_20210117_01of01.zip
+DEBUG:root:DLTINS_20210117_01of01.zip is already downloaded!
+INFO:root:DLTINS_20210117_01of01.zip downloaded!
+DEBUG:root:File was already extracted!
+INFO:root:XML Extracted to location: C:\Users\admin\Documents\SDE Intern Assignment\SteelEye\python_engineer\DLTINS_20210117_01of01.xml

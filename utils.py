@@ -89,8 +89,6 @@ def extract_from_zip(zip_path, file_type):
 
             # Traverse through each of them to find the required file:
             for file in files:
-                print(file)
-
                 # Extract file name and extension:
                 file_name, file_extension = os.path.splitext(file)
 
@@ -115,8 +113,5 @@ def extract_from_zip(zip_path, file_type):
     except Exception as error:
         logging.error("Failed to extract from ZIP file. Error: " + str(error))
 
-
-    pass
-
-
-
+    # If unable to extract file, return empty string:
+    return "" 

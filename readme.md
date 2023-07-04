@@ -40,3 +40,11 @@ Run the main program:
 
 `DLTINS_20210117_01of01.csv` - File csv created after following all the mentioned steps \
 `select.xml` - XML from where the download link was fetched (Step - 1). Was provided in the assignment iteself
+
+---
+
+## Links
+
+Assignment Link: https://github.com/steeleye/recruitment-ext/wiki/Python-Engineer-Assessment \
+My Resume: [Resume - Kartik Dholakia](https://drive.google.com/file/d/1RX1wVGbeHFeNIveOWhY9oJzwkeaPbRgp/view?usp=sharing) \
+My LinkedIn: https://www.linkedin.com/in/kartikdholakia
